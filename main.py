@@ -1,12 +1,16 @@
 import time
 from blinkstick import blinkstick
 import RPi.GPIO as GPIO
+import datetime
 
 GPIO.setmode(GPIO.BCM)
 PIR_PIN = 4
 GPIO.setup(PIR_PIN, GPIO.IN)
 
 bs = blinkstick.find_first()
+
+state = False
+state_at = None
 
 
 def light_on():
@@ -19,13 +23,23 @@ def light_off():
     bs.turn_off()
 
 
-def on_rising(pir_pin):
-    print('on_rising')
+def callback(pir_pin):
+    global state, state_at
+    print('callback')
+    if not state:
+        hello()
+    # state = GPIO.input(PIR_PIN)
+    state = True
+    state_at = datetime.datetime.utcnow()
+
+
+def hello():
+    print('hello')
     light_on()
 
 
-def on_falling(pir_pin):
-    print('on_falling')
+def goodbye():
+    print('goodbye')
     light_off()
 
 
@@ -33,11 +47,16 @@ print('PIR Module Test (CTRL+C to exit)')
 time.sleep(2)
 print('Ready')
 
-GPIO.add_event_detect(PIR_PIN, GPIO.RISING, callback=on_rising)
-GPIO.add_event_detect(PIR_PIN, GPIO.FALLING, callback=on_falling)
+GPIO.add_event_detect(PIR_PIN, GPIO.RISING, callback=callback)
 try:
     while True:
-        print('zzz')
+        if state_at:
+            last_detection = datetime.datetime.utcnow() - datetime.datetime(state_at)
+            print(f'seconds: {last_detection.seconds}')
+            if last_detection.seconds > 15:
+                state = False
+                goodbye()
+        print(f'state: {state}')
         time.sleep(1)
 
 except KeyboardInterrupt:

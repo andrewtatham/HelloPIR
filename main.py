@@ -53,11 +53,11 @@ try:
         if state_at:
             last_detection = datetime.datetime.utcnow() - datetime.datetime(state_at)
             seconds = last_detection.seconds
-            print(f'seconds: {seconds}')
+            print('seconds: {}'.format(seconds))
             if seconds > 15:
                 state = False
                 goodbye()
-        print(f'state: {state}')
+        print('state: {}'.format(state))
         time.sleep(1)
 
 except KeyboardInterrupt:

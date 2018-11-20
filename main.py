@@ -52,8 +52,9 @@ try:
     while True:
         if state_at:
             last_detection = datetime.datetime.utcnow() - datetime.datetime(state_at)
-            print(f'seconds: {last_detection.seconds}')
-            if last_detection.seconds > 15:
+            seconds = last_detection.seconds
+            print(f'seconds: {seconds}')
+            if seconds > 15:
                 state = False
                 goodbye()
         print(f'state: {state}')

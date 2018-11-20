@@ -51,7 +51,7 @@ GPIO.add_event_detect(PIR_PIN, GPIO.RISING, callback=callback)
 try:
     while True:
         if state_at:
-            last_detection = datetime.datetime.utcnow() - datetime.datetime(state_at)
+            last_detection = datetime.datetime.utcnow() - state_at
             seconds = last_detection.seconds
             print('seconds: {}'.format(seconds))
             if seconds > 15:
@@ -63,3 +63,5 @@ try:
 except KeyboardInterrupt:
     print('Quit')
     GPIO.cleanup()
+finally:
+    light_off()

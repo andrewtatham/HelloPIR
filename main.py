@@ -15,12 +15,18 @@ state_at = None
 
 def light_on():
     print('light_on')
-    bs.set_random_color()
+    try:
+        bs.set_random_color()
+    except Exception as e:
+        print(e)
 
 
 def light_off():
     print('light_off')
-    bs.turn_off()
+    try:
+        bs.turn_off()
+    except Exception as e:
+        print(e)
 
 
 def callback(pir_pin):
@@ -50,12 +56,13 @@ print('Ready')
 GPIO.add_event_detect(PIR_PIN, GPIO.RISING, callback=callback)
 try:
     while True:
-        if state_at:
+        if state and state_at:
             last_detection = datetime.datetime.utcnow() - state_at
             seconds = last_detection.seconds
             print('seconds: {}'.format(seconds))
             if seconds > 15:
                 state = False
+                state_at = None
                 goodbye()
         print('state: {}'.format(state))
         time.sleep(1)

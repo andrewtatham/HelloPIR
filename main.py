@@ -59,15 +59,15 @@ class MyPIR(object):
 
 class BlinkstickPIR(MyPIR):
     def __init__(self):
-        super().__init__()
+        super(BlinkstickPIR, self).__init__()
         self.bs = blinkstick.find_first()
 
     def hello(self):
-        super().hello()
+        super(BlinkstickPIR, self).hello()
         self.light_on()
 
     def goodbye(self):
-        super().goodbye()
+        super(BlinkstickPIR, self).goodbye()
         self.light_off()
 
     def light_on(self):

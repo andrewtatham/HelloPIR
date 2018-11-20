@@ -28,10 +28,10 @@ class MyPIR(object):
 
     def callback(self, pir_pin):
         print('callback')
-        self.state = True
-        self.state_at = datetime.datetime.utcnow()
         if not self.state:
             self.hello()
+        self.state = True
+        self.state_at = datetime.datetime.utcnow()
 
     def detect_timeout(self):
         if self.state and self.state_at:

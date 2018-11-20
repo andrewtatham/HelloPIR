@@ -44,6 +44,7 @@ class MyPIR(object):
                 self.state_at = None
 
     def run(self):
+        self.initialize()
         try:
             while True:
                 self.detect_timeout()

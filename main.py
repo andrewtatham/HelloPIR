@@ -9,20 +9,35 @@ GPIO.setup(PIR_PIN, GPIO.IN)
 bs = blinkstick.find_first()
 
 
-def MOTION(pir_pin):
-    print('Motion Detected!')
+def light_on():
+    print('light_on')
     bs.set_random_color()
-    time.sleep(0.5)
+
+
+def light_off():
+    print('light_off')
     bs.turn_off()
+
+
+def on_rising(pir_pin):
+    print('on_rising')
+    light_on()
+
+
+def on_falling(pir_pin):
+    print('on_falling')
+    light_off()
 
 
 print('PIR Module Test (CTRL+C to exit)')
 time.sleep(2)
 print('Ready')
 
+GPIO.add_event_detect(PIR_PIN, GPIO.RISING, callback=on_rising)
+GPIO.add_event_detect(PIR_PIN, GPIO.FALLING, callback=on_falling)
 try:
-    GPIO.add_event_detect(PIR_PIN, GPIO.RISING, callback=MOTION)
     while True:
+        print('zzz')
         time.sleep(1)
 
 except KeyboardInterrupt:

@@ -4,7 +4,7 @@ import RPi.GPIO as GPIO
 import datetime
 
 GPIO.setmode(GPIO.BCM)
-PIR_PIN = 4
+PIR_PIN = 4  # NB BCM PIN NUMBNER
 GPIO.setup(PIR_PIN, GPIO.IN)
 
 bs = blinkstick.find_first()
@@ -58,7 +58,7 @@ def detect_timeout():
         last_detection = datetime.datetime.utcnow() - state_at
         seconds = last_detection.seconds
         print('seconds: {}'.format(seconds))
-        if seconds > 15:
+        if seconds > 300:
             goodbye()
 
 

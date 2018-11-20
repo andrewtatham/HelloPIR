@@ -11,26 +11,24 @@ class MyPIR(object):
 
     def initialize(self):
         GPIO.setmode(GPIO.BCM)
-        PIR_PIN = 4  # NB BCM PIN NUMBER
-        GPIO.setup(PIR_PIN, GPIO.IN)
+        pir_pin = 4  # NB BCM PIN NUMBER
+        GPIO.setup(pir_pin, GPIO.IN)
 
         print('PIR Module Test (CTRL+C to exit)')
         time.sleep(2)
         print('Ready')
 
-        GPIO.add_event_detect(PIR_PIN, GPIO.RISING, callback=self.callback)
+        GPIO.add_event_detect(pir_pin, GPIO.RISING, callback=self.callback)
 
     def hello(self):
         print('hello')
-        self.state = True
 
     def goodbye(self):
         print('goodbye')
-        self.state = False
-        self.state_at = None
 
     def callback(self, pir_pin):
         print('callback')
+        self.state = True
         self.state_at = datetime.datetime.utcnow()
         if not self.state:
             self.hello()
@@ -42,6 +40,8 @@ class MyPIR(object):
             print('seconds: {}'.format(seconds))
             if seconds > 300:
                 self.goodbye()
+                self.state = False
+                self.state_at = None
 
     def run(self):
         try:

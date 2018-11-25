@@ -38,7 +38,7 @@ class MyPIR(object):
             last_detection = datetime.datetime.utcnow() - self.state_at
             seconds = last_detection.seconds
             print('seconds: {}'.format(seconds))
-            if seconds > 300:
+            if seconds > 900:
                 self.goodbye()
                 self.state = False
                 self.state_at = None

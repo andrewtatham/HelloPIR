@@ -82,7 +82,7 @@ class BlinkstickPIR(MyPIR):
     def light_on(self):
         print('light_on')
         try:
-            self.bs.set_random_color()
+            self.bs.set_color(0, 1, 0, 8)
         except Exception as e:
             print(e)
 

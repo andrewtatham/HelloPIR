@@ -23,6 +23,9 @@ class MyPIR(object):
     def hello(self):
         print('hello')
 
+    def movement(self):
+        print('movement')
+
     def goodbye(self):
         print('goodbye')
 
@@ -30,6 +33,7 @@ class MyPIR(object):
         print('callback')
         if not self.state:
             self.hello()
+        self.movement()
         self.state = True
         self.state_at = datetime.datetime.utcnow()
 
@@ -67,6 +71,10 @@ class BlinkstickPIR(MyPIR):
         super(BlinkstickPIR, self).hello()
         self.light_on()
 
+    def movement(self):
+        super(BlinkstickPIR, self).movement()
+        self.light_blink()
+
     def goodbye(self):
         super(BlinkstickPIR, self).goodbye()
         self.light_off()
@@ -75,6 +83,13 @@ class BlinkstickPIR(MyPIR):
         print('light_on')
         try:
             self.bs.set_random_color()
+        except Exception as e:
+            print(e)
+
+    def light_blink(self):
+        print('light_blink')
+        try:
+            self.bs.blink(0, 1, 8)
         except Exception as e:
             print(e)
 

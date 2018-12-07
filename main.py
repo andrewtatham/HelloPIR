@@ -56,7 +56,7 @@ class MyPIR(object):
         try:
             while True:
                 self.detect_timeout()
-                print('state: {}'.format(self.state))
+                # print('state: {}'.format(self.state))
                 time.sleep(1)
 
         except KeyboardInterrupt:
@@ -135,7 +135,7 @@ class BlinkstickPIR(MyPIR):
     def set_colour(self):
         h, s, v = self._hsv
         r, g, b = colorsys.hsv_to_rgb(h, s, v)
-        print("Setting Colour rgb: {}, hsv: {}".Format((r, g, b), (h, s, v)))
+        print("Setting Colour rgb: {}, hsv: {}".format((r, g, b), (h, s, v)))
         self.bs.set_color(0, 0, r, g, b)
         self.bs.set_color(0, 1, r, g, b)
 

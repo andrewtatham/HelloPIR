@@ -116,7 +116,7 @@ class BlinkstickPIR(MyPIR):
         try:
             h, s, v = self._hsv
             h = (h + 0.025) % 1.0
-            v = max(0.1, v * 0.85)
+            v = max(0.05, v * 0.85)
             self._hsv = (h, s, v)
             self.set_colour()
         except Exception as e:

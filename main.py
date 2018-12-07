@@ -107,7 +107,7 @@ class BlinkstickPIR(MyPIR):
             v = 1.0
             self._hsv = (h, s, v)
             self.set_colour()
-            time.sleep(1)
+            time.sleep(0.1)
         except Exception as e:
             print(e)
 
@@ -115,8 +115,8 @@ class BlinkstickPIR(MyPIR):
         print('light_dim')
         try:
             h, s, v = self._hsv
-            h = (h + 0.01) % 1.0
-            v = max(0.0, v * 0.85)
+            h = (h + 0.025) % 1.0
+            v = max(0.1, v * 0.85)
             self._hsv = (h, s, v)
             self.set_colour()
         except Exception as e:

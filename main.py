@@ -55,6 +55,7 @@ class MyPIR(object):
         self.initialize()
         try:
             while True:
+                self.tick()
                 self.detect_timeout()
                 # print('state: {}'.format(self.state))
                 time.sleep(1)
@@ -71,7 +72,7 @@ class BlinkstickPIR(MyPIR):
         super(BlinkstickPIR, self).__init__()
         self.bs = blinkstick.find_first()
         self.light_off()
-        self._hsv = (0, 0, 0)
+        self._hsv = (0, 1.0, 0)
 
     def hello(self):
         super(BlinkstickPIR, self).hello()

@@ -136,6 +136,9 @@ class BlinkstickPIR(MyPIR):
     def set_colour(self):
         h, s, v = self._hsv
         r, g, b = colorsys.hsv_to_rgb(h, s, v)
+        r = int(255 * r)
+        g = int(255 * g)
+        b = int(255 * b)
         print("Setting Colour rgb: {}, hsv: {}".format((r, g, b), (h, s, v)))
         self.bs.set_color(0, 0, r, g, b)
         self.bs.set_color(0, 1, r, g, b)

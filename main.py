@@ -67,27 +67,27 @@ class MyPIR(object):
             GPIO.cleanup()
 
 
-class BlinkstickPIR(MyPIR):
+class BlinkstickNanoPIR(MyPIR):
     def __init__(self):
-        super(BlinkstickPIR, self).__init__()
+        super(BlinkstickNanoPIR, self).__init__()
         self.bs = blinkstick.find_first()
         self.light_off()
         self._hsv = (0, 1.0, 0)
 
     def hello(self):
-        super(BlinkstickPIR, self).hello()
+        super(BlinkstickNanoPIR, self).hello()
         self.light_on()
 
     def movement(self):
-        super(BlinkstickPIR, self).movement()
+        super(BlinkstickNanoPIR, self).movement()
         self.light_blink()
 
     def tick(self):
-        super(BlinkstickPIR, self).tick()
+        super(BlinkstickNanoPIR, self).tick()
         self.light_dim()
 
     def goodbye(self):
-        super(BlinkstickPIR, self).goodbye()
+        super(BlinkstickNanoPIR, self).goodbye()
         self.light_off()
 
     def light_on(self):
@@ -145,5 +145,5 @@ class BlinkstickPIR(MyPIR):
 
 
 if __name__ == '__main__':
-    pir = BlinkstickPIR()
+    pir = BlinkstickNanoPIR()
     pir.run()
